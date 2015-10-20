@@ -1,0 +1,20 @@
+{
+  "name": "figdice/symcrypt",
+  "description": "Simple symmetric cryptography",
+  "type": "library",
+  "keywords": ["cryptography"],
+  "minimum-stability": "stable",
+  "license": "GPL-3.0+",
+  "version": "2.2.0",
+  "authors": [
+    {
+      "name": "Arthur Furlan",
+      "email": "arthur.furlan@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "arthurfurlan\\crypt\\": "./"
+    }
+  }
+}
