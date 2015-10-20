@@ -1,4 +1,6 @@
 <?php
+namespace arthurfurlan\crypt;
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 // {{{ Crypt class
@@ -135,14 +137,15 @@ class Crypt {
      */
     public function encrypt($data) {
         $data = (string) $data;
+        $encrypt = '';
         for ($i=0;$i<strlen($data);$i++)
-            @$encrypt .= $data[$i] ^
+            $encrypt .= $data[$i] ^
                 $this->_key[$i % strlen($this->_key)];
         if ($this->_mode === Crypt::MODE_B64)
             return base64_encode(@$encrypt);
         if ($this->_mode === Crypt::MODE_HEX)
             return $this->_encodeHexadecimal(@$encrypt);
-        return @$encrypt;
+        return $encrypt;
     }
 
     // }}}
@@ -162,9 +165,10 @@ class Crypt {
             $crypt = $this->_decodeHexadecimal($crypt);
         if ($this->_mode === Crypt::MODE_B64)
             $crypt = (string)base64_decode($crypt);
+        $data = '';
         for ($i=0;$i<strlen($crypt);$i++)
-            @$data .= $crypt[$i] ^ $this->_key[$i % strlen($this->_key)];
-        return @$data;
+            $data .= $crypt[$i] ^ $this->_key[$i % strlen($this->_key)];
+        return $data;
     }
 
     // }}}
@@ -245,10 +249,11 @@ class Crypt {
      */
     protected function _encodeHexadecimal($data) {
         $data = (string) $data;
+        $hexcrypt = '';
         for ($i=0;$i<strlen($data);$i++)
-            @$hexcrypt .= str_pad(dechex(ord(
+            $hexcrypt .= str_pad(dechex(ord(
                 $data[$i])), 2, 0, STR_PAD_LEFT);
-        return @$hexcrypt;
+        return $hexcrypt;
     }
 
     // }}}
@@ -264,9 +269,10 @@ class Crypt {
      */
     protected function _decodeHexadecimal($hexcrypt) {
         $hexcrypt = (string) $hexcrypt;
+        $data = '';
         for ($i=0;$i<strlen($hexcrypt);$i+=2)
-            @$data .= chr(hexdec(substr($hexcrypt, $i, 2)));
-        return @$data;
+            $data .= chr(hexdec(substr($hexcrypt, $i, 2)));
+        return $data;
     }
 
     // }}}
@@ -274,4 +280,3 @@ class Crypt {
 }
 
 // }}}
-?>
