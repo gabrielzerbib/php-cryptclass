@@ -16,5 +16,8 @@
     "psr-4": {
       "arthurfurlan\\crypt\\": "./"
     }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.0"
   }
 }
